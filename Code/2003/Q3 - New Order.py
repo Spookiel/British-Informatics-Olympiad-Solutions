@@ -51,6 +51,8 @@ if ones!=0:
 else:
     print("0")
 
+for m in arr[:7]:
+    print(m[:7])
 """Analysis - Full credit solution
 
 This is a DP (Dynamic Programming) problem once you break down the question and work out what they are asking.
@@ -81,6 +83,22 @@ To start with this problem, we need to find a way of counting all the substrings
     
     }
 
+    This can easily be converted into a bottom up approach using a 2D array 
+    Where length of strings are the columns and the rows are the number of ones in the string
+    
+    eg
+    
+    0 1 2 3 4 5 6 
+1   0 1 0 0 0 0 0 
+2   0 1 1 0 0 0 0 
+3   0 1 2 1 0 0 0 
+4   0 1 3 3 1 0 0
+5   0 1 4 6 4 1 0 
+
+This means that there is one string which is one character long and contains one 1, and 2 strings which are 3 characters long and
+contain 2 ones - This holds, as we can see from the example below
+        101
+        110
 
 
 
