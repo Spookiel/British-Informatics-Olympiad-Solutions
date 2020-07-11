@@ -18,7 +18,7 @@ that it could be given in competition, in this case: 1000 friends, and any rhyme
 One thing to note with this problem in particular, is the -1 on line 6. Since a person does point to themselves 
 in the rhyme we need to subtract one for this.
 
-
+,
 It is generally possible to solve these problems if you have a basic mathematical background, for example,
 computing primes quickly, and if you know a language well.
 
