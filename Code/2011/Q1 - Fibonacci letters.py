@@ -14,7 +14,7 @@ if n==1:
 else:
 
     print(alpha[let2-1])
-
+""
 def b():
     a = alpha.index("X")-alpha.index("F")
     print(alpha[a])
