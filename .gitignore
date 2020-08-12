@@ -15,7 +15,7 @@
 
 # Generated files
 .idea/**/contentModel.xml
-
+.idea/British-Informatics-Olympiad-Solutions.iml
 # Sensitive or high-churn files
 .idea/**/dataSources/
 .idea/**/dataSources.ids
