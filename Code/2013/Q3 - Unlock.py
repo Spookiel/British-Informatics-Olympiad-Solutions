@@ -77,9 +77,7 @@ class Board:
         if isSelf:
             for letter in alphal[5:-1]:
                 x,y = self.convToCoords(letter)
-                #print(x,y, letter, self.board[y-1][x])
                 while self.board[y-1][x] != 0:
-                    #print("toggling", letter, self.convToCoords(letter), alphal.index(letter), "found invalid", y-1,x)
                     self.toggle(letter, [])
                     #self.pboard()
                     self.done[letter] += 1
@@ -144,3 +142,4 @@ if answers:
     print("\n".join(answers))
 else:
     print("IMPOSSIBLE")
+
