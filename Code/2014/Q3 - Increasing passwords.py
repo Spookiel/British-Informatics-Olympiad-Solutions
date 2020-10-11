@@ -16,8 +16,7 @@ def build(n, targetLen, ans=""):
 
         if can >= n:
             return build(n, targetLen - 1, ans + alpha[letter])
-        else:
-            n -= can
+        n -= can
 
 
 targLen = 1

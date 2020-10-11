@@ -26,7 +26,7 @@ def brute(n):
 first = [i for i in brute(30)]
 
 
-scores = [0,1, 9]
+scores = [0,1,9]
 c= 2
 tot = 10
 while tot < n:
