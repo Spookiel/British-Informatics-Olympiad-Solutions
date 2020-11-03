@@ -4,36 +4,75 @@ from collections import deque,Counter,defaultdict
 
 
 s = list(input())
-s = deque(s)
 steps, p = list(map(int, input().split()))
 start = time.time()
-for step in range(steps):
-    new = deque()
-    while s and len(new) < p:
-        char = s.popleft()
-        if char=="A":
-            new.append("B")
-        elif char=="B":
-            new.append("A")
-            new.append("B")
-        elif char=="C":
-            new.append("C")
-            new.append("D")
-        elif char=="D":
-            new.append("D")
-            new.append("C")
-        else:
-            new.append("E")
-            new.append("E")
-    s = new
-    print(len(s), step)
 
-got = defaultdict(int)
-while p:
-    got[s.popleft()] += 1
-    p -= 1
+def total(d):
+    return sum([i for i in d.values()])
 
-for char in "ABCDE":
-    print(got[char], end=" ")
-print("\nCOMPLETED IN", end=" ")
-print(time.time()-start)
+def merge(a,b):
+    for i in b:
+        a[i] += b[i]
+    return a
+
+from functools import lru_cache
+
+def solve(letter, steps):
+    if steps==0:
+        di = defaultdict(int)
+        di[letter] = 1
+        return di
+    if letter=="A":
+        return solve("B", steps-1)
+    elif letter=="B":
+        return merge(solve("A", steps-1),solve("B", steps-1))
+    elif letter=="C":
+        di = defaultdict(int)
+        di["C"] = 2**(steps-1)
+        di["D"] = 2**(steps-1)
+        return di
+    elif letter=="D":
+        di = defaultdict(int)
+        di["D"] = 2**(steps-1)
+        di["C"] = 2**(steps-1)
+        return di
+    else:
+        di = defaultdict(int)
+        di["E"] = 2**steps
+        return di
+
+
+lookup = {"A":"B", "B":"AB", "C":"CD", "D":"DC", "E":"EE"}
+import time
+startTime = time.time()
+
+doing = deque()
+
+for i in s:
+    doing.insert(0, (i, 0))
+ans = defaultdict(int)
+while doing and p:
+
+
+    ne,depth = doing.pop()
+    score = solve(ne, steps-depth)
+    #print(ne, depth, score)
+    if total(score) <= p:
+        #print("ADDING", score, ne, depth)
+        p -= total(score)
+        ans = merge(ans, score)
+    else:
+        #print("CAN'T ADD", ne, depth, score)
+        flag = False
+        for i in lookup[ne][::-1]:
+            if depth+1 <= steps:
+                doing.append((i, depth+1))
+            else:
+                break
+#print(ans)
+for i in "ABCDE":
+    print(ans[i], end=" ")
+
+
+print("\n")
+print(time.time()-startTime)
