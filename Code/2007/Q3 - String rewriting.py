@@ -17,15 +17,32 @@ def merge(a,b):
 
 from functools import lru_cache
 
+@lru_cache(maxsize=None)
+def fib(n):
+    if n==0:
+        return 0
+    elif n==1:
+        return 1
+    return fib(n-1)+fib(n-2)
+
+
+
+#@lru_cache(maxsize=None)
 def solve(letter, steps):
     if steps==0:
         di = defaultdict(int)
         di[letter] = 1
         return di
     if letter=="A":
-        return solve("B", steps-1)
+        di =defaultdict(int)
+        di["A"] = fib(steps-1)
+        di["B"] = fib(steps)
+        return di
     elif letter=="B":
-        return merge(solve("A", steps-1),solve("B", steps-1))
+        di = defaultdict(int)
+        di["B"] = fib(steps+1)
+        di["A"] = fib(steps)
+        return di
     elif letter=="C":
         di = defaultdict(int)
         di["C"] = 2**(steps-1)
@@ -74,5 +91,5 @@ for i in "ABCDE":
     print(ans[i], end=" ")
 
 
-print("\n")
-print(time.time()-startTime)
+print("\n", end="")
+print(f"FINISHED IN {time.time()-startTime}")
