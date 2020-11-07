@@ -1,53 +1,42 @@
 
 
-"""
-Solution coming soon
-"""
-from copy import deepcopy
+from functool import lru_cache
 
 
-def solve(actors):
-
-    print(actors)
-    ways = 0
-    scenes = sum(actors)
-
-    startState = ([[] for i in range(len(actors))], set())
-
-    looking = [startState]
-
-    while looking:
-        nextState, total = looking.pop(0)
-        #print(nextState, total)
+@lru_cache(maxsize=None)
+def solve(state):
 
 
-        possible = set(range(1, sum(actors)+1))-total
-
-        for actorInd,actor in enumerate(nextState):
-            if not actor:
-                for scene in possible:
-                    copState = deepcopy(nextState)
-                    copTotal = deepcopy(total)
-                    copState[actorInd].append(scene)
-                    copTotal.add(scene)
-                    looking.append((copState,copTotal))
-            else:
-                for scene in possible:
-                    if len(actor) < actors[actorInd]:
-                        for scene in possible:
-                            if scene > actor[-1]:
-                                copState = deepcopy(nextState)
-                                copTotal = deepcopy(total)
-                                copState[actorInd].append(scene)
-                                copTotal.add(scene)
-                                looking.append((copState, copTotal))
+    finished = True
+    stateCheck = list(state)
+    pairs = [stateCheck[i:i+2] for i in range(0, len(stateCheck), 2)]
 
 
+    for actor in pairs:
+        if actor[0] > actor[1]:
+            return 0
+        elif actor[0] < actor[1]:
+            finished = False
+    if finished:
+        return 1
+
+    total = 0
+    for actorInd, actor in enumerate(pairs):
+        canChange = True
+        for seniorActor in pairs[:actorInd]:
+            if seniorActor[0] <= actor[0]:
+                canChange = False
+        if canChange:
+            copState = list(stateCheck)
+            copState[actorInd*2] += 1
+            total += solve(tuple(copState))
+    return total
 
 
-
-
-solve([3,2])
-
-
-def solve(curScene, )
+actors  = int(input())
+start = []
+inp = list(map(int, input().split()))
+for i in inp:
+    start.append(0)
+    start.append(i)
+print(solve(tuple(start)))

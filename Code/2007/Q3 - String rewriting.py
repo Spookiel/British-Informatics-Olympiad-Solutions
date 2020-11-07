@@ -26,15 +26,13 @@ def fib(n):
     return fib(n-1)+fib(n-2)
 
 
-
-#@lru_cache(maxsize=None)
 def solve(letter, steps):
     if steps==0:
         di = defaultdict(int)
         di[letter] = 1
         return di
     if letter=="A":
-        di =defaultdict(int)
+        di = defaultdict(int)
         di["A"] = fib(steps-1)
         di["B"] = fib(steps)
         return di
