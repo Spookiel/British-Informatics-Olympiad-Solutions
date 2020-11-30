@@ -1,31 +1,8 @@
-
-
 n = int(input())
+import time
+#print(2**1000)
 
-
-def check(n):
-    for i in range((len(str(n))//2)+1):
-        if int(str(n)[-i-1])+int(str(n)[i])!=10:
-            return False
-    return True
-
-
-
-def brute(n):
-    c = 0
-
-    cur = 1
-    while True:
-        if check(cur):
-            yield cur
-            c += 1
-        if c==n:
-            break
-        cur += 1
-
-first = [i for i in brute(30)]
-
-
+start = time.time()
 scores = [0,1,9]
 c= 2
 tot = 10
@@ -60,7 +37,7 @@ else:
     if len(ans)%2==1:
         ans[len(ans)//2] = "5"
     print("".join(ans))
-
+    print("FINISHED IN", time.time()-start)
 
 
 def b():
@@ -83,4 +60,5 @@ def c():
 
     print(len(scores)-1)
 
-#) c() -> 38
+
+
