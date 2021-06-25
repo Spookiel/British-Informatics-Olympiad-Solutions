@@ -110,7 +110,8 @@ class Board:
     def countSquares(self, player):
         for box in range(25):
             cbx,cby = divmod(box, 5)
-            if self.hlines[cbx]==1 and self.hlines[cbx]
+            if self.hlines[cbx]==1 and self.hlines[cbx]:
+                pass
 
     def playTurn(self):
         self.playOne()

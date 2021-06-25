@@ -28,11 +28,10 @@ class Board:
     def move(self):
         self.grid[self.pos] = self.dis+1
 
-        nextMove = self.instructions[self.movePos]
         self.movePos += 1
         self.movePos %= len(self.instructions)
 
-        self.dir += self.instLookup[nextMove]
+        self.dir += self.instLookup[self.instructions[self.movePos]]
         self.dir %= 360
 
         canMove = False
@@ -74,7 +73,9 @@ dis, instructions, moves = input().split()
 
 dis = int(dis)
 moves = int(moves)
+import time
 
+start = time.time()
 solve = Board(dis, instructions, moves)
 
 finished = solve.main()
@@ -84,5 +85,6 @@ ans = list(solve.pos)
 ans[1] *= -1
 
 print(f"({ans[0]},{ans[1]})")
+print(f"Finished in {time.time()-start}")
 
 
