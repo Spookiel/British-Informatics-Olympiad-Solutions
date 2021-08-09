@@ -1,6 +1,3 @@
-print("LUKE MORAN")
-print("AGE: 16")
-print("The Perse Upper")
 
 """
 class Triangle:

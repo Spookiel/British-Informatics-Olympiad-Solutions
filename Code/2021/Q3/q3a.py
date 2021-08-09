@@ -1,6 +1,4 @@
-print("LUKE MORAN")
-print("AGE: 16")
-print("The Perse Upper")
+
 
 
 #store the windows as a set and then compute transformations as a graph

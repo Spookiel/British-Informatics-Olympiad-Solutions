@@ -1,6 +1,4 @@
-print("LUKE MORAN")
-print("AGE: 16")
-print("The Perse Upper")
+
 
 s1,s2 = input().split()
 
