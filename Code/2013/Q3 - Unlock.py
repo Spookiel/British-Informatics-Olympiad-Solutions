@@ -99,6 +99,7 @@ class Board:
         got = []
         for i in range(1, 6):
             for pos in combinations("abcde", i):
+                print(pos)
                 done = deepcopy(self.done)
                 cop = deepcopy(self.board)
                 for let in pos:
