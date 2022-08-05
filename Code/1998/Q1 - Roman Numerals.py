@@ -1,3 +1,4 @@
+#Solution made by @Catatria
 sep = []
 ans = []
 num = str(input("Input a number. "))
