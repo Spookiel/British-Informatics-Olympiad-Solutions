@@ -130,7 +130,7 @@ for iter in range(2):
         test1 = [possibilities[e*2][0], middle1, possibilities[e*2][1]]
         test2 = [possibilities[(e*2)+1][0], middle2, possibilities[(e*2)+1][1]] # Appends a middle (average of both sides) to the dice
         sort2(test1, test2) # Sorts it
-        check(sides, check1, info1, info2, test1, test2, 0) # Checks it
+        check(sides, check1, info1, info2, test1, test2) # Checks it
       middle(possibilities[e*2][0], possibilities[e*2][1], possibilities[(e*2)+1][0], possibilities[(e*2)+1][1], middleList1, middleList2, 0)
       for zi in range(len(middleList1)):
         for yj in range(len(middleList2)):
