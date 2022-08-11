@@ -18,7 +18,7 @@ def check(sides, check1, info1, info2, sample1, sample2): # Creates a function c
         dice1Solution = " ".join(final1)
         dice2Solution = " ".join(final2) # Makes format nice
         print("\nDice 1: " + dice1Solution)
-        print("Dice 2: " + dice2Solution) # Prints out solution if it did
+        print("Dice 2: " + dice2Solution + "\n") # Prints out solution if it did
         exit()
   check2.clear() # Clears check2 for the next use
 
@@ -131,55 +131,55 @@ for iter in range(2):
         test2 = [possibilities[(e*2)+1][0], middle2, possibilities[(e*2)+1][1]] # Appends a middle (average of both sides) to the dice
         sort2(test1, test2) # Sorts it
         check(sides, check1, info1, info2, test1, test2) # Checks it
-      middle(possibilities[e*2][0], possibilities[e*2][1], possibilities[(e*2)+1][0], possibilities[(e*2)+1][1], middleList1, middleList2, 0)
-      for zi in range(len(middleList1)):
-        for yj in range(len(middleList2)):
-          if sides != 5:
-            test1.append([possibilities[e*2][0], middleList1[zi][0], middleList1[zi][1], possibilities[e*2][1]])
-            test2.append([possibilities[(e*2)+1][0], middleList2[yj][0], middleList2[yj][1], possibilities[(e*2)+1][1]])
-          else: # Appends to a new variable called test
-            test1.append([int(possibilities[e*2][0]), int(middleList1[zi][0]), int(middleList1[zi][1]), int(middleList1[zi][2]), int(possibilities[e*2][1])])
-            test2.append([int(possibilities[(e*2)+1][0]), int(middleList2[yj][0]), int(middleList2[yj][1]), int(middleList2[yj][2]), int(possibilities[(e*2)+1][1])])
-          sort2(test1[0], test2[0])
-          if sides == 4 or sides == 5:
-            check(sides, check1, info1, info2, test1[0], test2[0]) # Checks solution if sides is 4 or 5
-          else:
-            middle(test1[0][1], test1[0][2], test2[0][1], test2[0][2], middleList3, middleList4, iter)
-            for xi in range(len(middleList3)):
-              for wj in range(len(middleList4)):
-                for k in range(4):
-                  test3.append(test1[0][k])
-                  test4.append(test2[0][k])
-                test3.append(middleList3[xi][0])
-                test3.append(middleList3[xi][1])
-                test4.append(middleList4[wj][0])
-                test4.append(middleList4[wj][1]) # Appends the results to a new list
-                if sides == 7:
-                  test3.append(middleList3[xi][2])
-                  test4.append(middleList4[wj][2]) # Appends the extra side if the sides is 7
-                sort2(test3, test4) # Sorts the lists
-                if sides == 6 or sides == 7: # Checks the solutions if sides are 6 and 7
-                  check(sides, check1, info1, info2, test3, test4)
-                else:
-                  middle(test3[2], test3[3], test4[2], test4[3], middleList5, middleList6, 0) # Finds another pair
-                  for vi in range(len(middleList5)):
-                    for uj in range(len(middleList6)):
-                      for l in range(6):
-                        test5.append(test3[l])
-                        test6.append(test4[l]) 
-                      test5.append(middleList5[vi][0])
-                      test5.append(middleList5[vi][1])
-                      test6.append(middleList6[uj][0])
-                      test6.append(middleList6[uj][1]) # Appends them to a new list
-                      sort2(test5, test6)
-                      check(sides, check1, info1, info2, test5, test6) # Checks it
-                      reset2(test5, test6)
-                  reset2(middleList5, middleList6)
-                reset2(test3, test4)
-            reset2(middleList3, middleList4)
-          reset2(test1, test2)
-      reset2(middleList1, middleList2) # Resets the lists to be used again   
-      
+      else:
+        middle(possibilities[e*2][0], possibilities[e*2][1], possibilities[(e*2)+1][0], possibilities[(e*2)+1][1], middleList1, middleList2, 0)
+        for zi in range(len(middleList1)):
+          for yj in range(len(middleList2)):
+            if sides != 5:
+              test1.append([possibilities[e*2][0], middleList1[zi][0], middleList1[zi][1], possibilities[e*2][1]])
+              test2.append([possibilities[(e*2)+1][0], middleList2[yj][0], middleList2[yj][1], possibilities[(e*2)+1][1]])
+            else: # Appends to a new variable called test
+              test1.append([int(possibilities[e*2][0]), int(middleList1[zi][0]), int(middleList1[zi][1]), int(middleList1[zi][2]), int(possibilities[e*2][1])])
+              test2.append([int(possibilities[(e*2)+1][0]), int(middleList2[yj][0]), int(middleList2[yj][1]), int(middleList2[yj][2]), int(possibilities[(e*2)+1][1])])
+            sort2(test1[0], test2[0])
+            if sides == 4 or sides == 5:
+              check(sides, check1, info1, info2, test1[0], test2[0]) # Checks solution if sides is 4 or 5
+            else:
+              middle(test1[0][1], test1[0][2], test2[0][1], test2[0][2], middleList3, middleList4, iter)
+              for xi in range(len(middleList3)):
+                for wj in range(len(middleList4)):
+                  for k in range(4):
+                    test3.append(test1[0][k])
+                    test4.append(test2[0][k])
+                  test3.append(middleList3[xi][0])
+                  test3.append(middleList3[xi][1])
+                  test4.append(middleList4[wj][0])
+                  test4.append(middleList4[wj][1]) # Appends the results to a new list
+                  if sides == 7:
+                    test3.append(middleList3[xi][2])
+                    test4.append(middleList4[wj][2]) # Appends the extra side if the sides is 7
+                  sort2(test3, test4) # Sorts the lists
+                  if sides == 6 or sides == 7: # Checks the solutions if sides are 6 and 7
+                    check(sides, check1, info1, info2, test3, test4)
+                  else:
+                    middle(test3[2], test3[3], test4[2], test4[3], middleList5, middleList6, 0) # Finds another pair
+                    for vi in range(len(middleList5)):
+                      for uj in range(len(middleList6)):
+                        for l in range(6):
+                          test5.append(test3[l])
+                          test6.append(test4[l]) 
+                        test5.append(middleList5[vi][0])
+                        test5.append(middleList5[vi][1])
+                        test6.append(middleList6[uj][0])
+                        test6.append(middleList6[uj][1]) # Appends them to a new list
+                        sort2(test5, test6)
+                        check(sides, check1, info1, info2, test5, test6) # Checks it
+                        reset2(test5, test6)
+                    reset2(middleList5, middleList6)
+                  reset2(test3, test4)
+              reset2(middleList3, middleList4)
+            reset2(test1, test2)
+        reset2(middleList1, middleList2) # Resets the lists to be used again
 if not finish:
-  print("\nImpossible")
+  print("\nImpossible\n")
   exit()
