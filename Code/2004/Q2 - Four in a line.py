@@ -13,14 +13,17 @@ class Board:
 
     def play(self, col: int, player, test=False):
 
+        flag = False
         if self.cheight[col] < 6:
 
 
             self.BOARD[self.cheight[col]][col] = player
             self.cheight[col] += 1
+            flag = True
 
         if not test:
             self.player = 1-player
+        return flag
 
 
     ### Play every possible move for the current player and check if any of them win
@@ -78,21 +81,26 @@ class Board:
         return self.check_cols(player) or self.check_diags(player) or self.check_rows(player)
 
 
+    def not_full(self, col):
+        return self.BOARD[-1][col] == -1
     def choose_next(self):
 
+        print(self.cheight, "BEFORE")
 
         ### Rule One
 
         bmove = -1
         for poscol in range(7):
-            self.play(poscol, self.player, True)
+            played = self.play(poscol, self.player, True)
 
             if self.check_win(self.player):
                 bmove = poscol
-                self.undo_move(poscol)
+                if played: self.undo_move(poscol)
                 break
 
-            self.undo_move(poscol)
+
+            if played:
+                self.undo_move(poscol)
 
         if bmove != -1:
             print("RULE ONE")
@@ -102,13 +110,13 @@ class Board:
         ### Rule Two
 
         for poscol in range(7):
-            self.play(poscol, 1-self.player, True)
+            played = self.play(poscol, 1-self.player, True)
             if self.check_win(1-self.player):
                 bmove = poscol
-                self.undo_move(poscol)
+                if played: self.undo_move(poscol)
                 break
-
-            self.undo_move(poscol)
+            if played:
+                self.undo_move(poscol)
 
         if bmove != -1:
             print("RULE TWO")
@@ -118,16 +126,17 @@ class Board:
 
 
         print(self)
+        print(self.BOARD)
         print(self.cheight)
 
         bmove =-1
         for ccol in range(7):
-            if self.cheight[ccol] < 6:
+            if self.cheight[ccol] < 7 and self.not_full(ccol):
                 bmove = ccol
                 break
 
         if bmove != -1:
-            print("RULE THREE")
+            print("RULE THREE", ccol, self.cheight[ccol], "PLAYING INTO", self.BOARD[self.cheight[ccol]][ccol])
             return bmove
         return -1
 
@@ -144,6 +153,11 @@ class Board:
             print("VALID MOVE FOUND FOR PLAYER", self.player, nmove, self.cheight)
 
         self.play(nmove, self.player)
+
+
+        print(self)
+        print("PLAY_NEXT")
+
         if self.check_win(self.player):
             print(f"PLAYER {self.player+1} WINS!")
             self.finished = True
