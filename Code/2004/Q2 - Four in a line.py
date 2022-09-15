@@ -61,15 +61,41 @@ class Board:
                 cy = row
                 cx = col
                 c = 0
+
                 while self.BOARD[cy][cx] == player:
+                    #print(self.BOARD[cy][cx], player, self.BOARD[cy][cx] == player, cx, cy)
                     c += 1
                     ### Check going up and left first
                     cy += 1
                     cx -= 1
                     if not 0 <= cx < 7 or not 0 <= cy < 6:
                         break
+
+
+
+
                 if c==4:
                     return True
+
+                cy = row
+                c = 0
+                cx = col
+
+
+                while self.BOARD[cy][cx] == player:
+                    #print(self.BOARD[cy][cx], player, self.BOARD[cy][cx] == player, cx, cy)
+                    c += 1
+                    ### Check going up and left first
+                    cy += 1
+                    cx += 1
+                    if not 0 <= cx < 7 or not 0 <= cy < 6:
+                        break
+
+                if c==4:
+                    return True
+
+                #print(f"ROW {row} COL {col} COUNT {c}")
+
         return False
 
     def check_win(self, player):
@@ -85,7 +111,10 @@ class Board:
         return self.BOARD[-1][col] == -1
     def choose_next(self):
 
-        print(self.cheight, "BEFORE")
+        if self.finished:
+            return -1
+
+        #print(self.cheight, "BEFORE")
 
         ### Rule One
 
@@ -103,7 +132,7 @@ class Board:
                 self.undo_move(poscol)
 
         if bmove != -1:
-            print("RULE ONE")
+            #print("RULE ONE")
             return bmove
 
 
@@ -119,15 +148,15 @@ class Board:
                 self.undo_move(poscol)
 
         if bmove != -1:
-            print("RULE TWO")
+            #print("RULE TWO")
             return bmove
 
         ### Rule 3
 
 
-        print(self)
-        print(self.BOARD)
-        print(self.cheight)
+       # print(self)
+        #print(self.BOARD)
+        #print(self.cheight)
 
         bmove =-1
         for ccol in range(7):
@@ -136,7 +165,7 @@ class Board:
                 break
 
         if bmove != -1:
-            print("RULE THREE", ccol, self.cheight[ccol], "PLAYING INTO", self.BOARD[self.cheight[ccol]][ccol])
+            #print("RULE THREE", ccol, self.cheight[ccol], "PLAYING INTO", self.BOARD[self.cheight[ccol]][ccol])
             return bmove
         return -1
 
@@ -145,21 +174,25 @@ class Board:
 
     def play_next(self):
 
+        if self.finished:
+            return
         nmove = self.choose_next()
 
         if nmove == -1:
-            print("NO VALID MOVE FOUND FOR PLAYER")
+            #print("NO VALID MOVE FOUND FOR PLAYER")
+            return
         else:
-            print("VALID MOVE FOUND FOR PLAYER", self.player, nmove, self.cheight)
+            #print("VALID MOVE FOUND FOR PLAYER", self.player, nmove, self.cheight)
+            pass
 
         self.play(nmove, self.player)
 
 
-        print(self)
-        print("PLAY_NEXT")
+        #print(self)
+        #print("PLAY_NEXT", self.finished, self.check_win(self.player), self.check_win(1-self.player))
 
-        if self.check_win(self.player):
-            print(f"PLAYER {self.player+1} WINS!")
+        if self.check_win(1-self.player):
+            print(f"PLAYER {1-self.player+1} WINS!")
             self.finished = True
 
 
@@ -189,6 +222,13 @@ class Board:
             s += "\n"
         return s
 
+"""
+TESTBOARD = Board()
+for i in range(4):
+    TESTBOARD.BOARD[i][i] = 0
+
+
+assert TESTBOARD.check_diags(0)"""
 
 
 
