@@ -141,8 +141,10 @@ while 1:
         break
 
 
-    realgrid.move_die(testdie)
-    testdie.tip()
+    for x in range(turns):
+        realgrid.move_die(testdie)
+        testdie.tip()
 
     realgrid.show_grid()
-    print(testdie)
+
+
