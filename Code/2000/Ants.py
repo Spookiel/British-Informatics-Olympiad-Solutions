@@ -1,96 +1,53 @@
-class Ant:
-    DIR_LOOK = {"T":0, "R":90, "L":270, "B":180}
-    ANGLE_TO_LETTER = {j:i for (i,j) in list(DIR_LOOK.items())}
-    ANGLE_TO_DELTA = {0: (0,1), 90:(1,0), 180:(0,-1), 270:(-1,0)}
-    def __init__(self, x,y, dir):
-        self.x = x
-        self.y = y
-        self.dir = Ant.DIR_LOOK[dir]
+print("""Co-ordinates are from 1 - 11")
+Directions are T  = Top, B = Bottom, L = Left, R = Right
+Please use the format 'x y d' e.g. '1 1 T'\n""") 
+position1 = str(input("Input ant 1's co-ordinates and direction: ")).split(" ")
+position2 = str(input("Input ant 2's co-ordinates and direction: ")).split(" ")
+directions = ["T", "R", "B", "L"]
 
-    @property
-    def off_board(self):
-        return 1 > self.x or 11 < self.x or 1 > self.y or 11 < self.y
+def rotate(direction, rotation):
+  index = directions.index(direction) + rotation
+  if index >= 4:
+    index -= 4
+  return directions[index]
+  
+class Ant: 
+  def __init__(self, x, y, direction): 
+    self.x, self.y, self.direction = x, y, direction
+    
+  def move(self, x, y, direction):
+    if not(x <= 0 or x >= 12 or y <= 0 or y >= 12):
+      if direction == "R" or direction == "L":
+        x += direction == "R" and 1 or -1
+      elif direction == "T" or direction == "B":
+        y += direction == "T" and 1 or -1
+      if x <= 0 or x >= 12 or y <= 0 or y >= 12:
+        self.x = 99
+      else:
+        empty = grid[-y + 11][x - 1] == "."
+        grid[-y + 11][x - 1] = empty and "*" or "."
+        self.direction = rotate(direction, empty and 1 or -1)
+        self.x, self.y = x, y
+            
+ant1 = Ant(position1[0], position1[1], position1[2])
+ant2 = Ant(position2[0], position2[1], position2[2])
 
+grid = []
+for _ in range(11):
+  grid.append([".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."])
 
-
-    def step(self, grid):
-
-        dx,dy = Ant.ANGLE_TO_DELTA[self.dir]
-        nx, ny = self.x+dx, self.y+dy
-
-        self.x = nx
-        self.y = ny
-
-
-        if not self.off_board:
-            ### Get tile at the new position
-            ntile = grid[(nx, ny)]
-
-            if ntile.col == 0:
-                ### Rotate right by 90
-                self.dir += 90
-                self.dir %= 360
-            else:
-                ### Rotate left by 90
-                self.dir -= 90
-                self.dir %= 360
-            grid[(nx, ny)].col = 1-grid[(nx, ny)].col
-
-    def __repr__(self):
-        if self.off_board:
-            return "Removed"
-        else:
-            return f"{self.x} {self.y} {Ant.ANGLE_TO_LETTER[self.dir]}"
-
-
-
-class Tile:
-    def __init__(self, x, y, col=0):
-        ### 0 is a white tile and 1 is a black tile
-        self.x = x
-        self.y = y
-        self.col = col
-
-    def __repr__(self):
-        return "." if not self.col else "*"
-
-grid = {}
-for i in range(1,12):
-    for j in range(1,12):
-        grid[(j,i)] = Tile(j, i)
-
-
-def print_grid(grid):
-    ### Prints the grid in the correct orientation
-
-    for y in range(11,0,-1):
-        for x in range(1,12):
-            print(grid[(x,y)], end=" ")
-        print()
-
-
-x1,y1,d1 = input().split()
-x2,y2,d2 = input().split()
-
-x1,y1 = list(map(int, [x1,y1]))
-x2,y2 = list(map(int, [x2,y2]))
-
-a1 = Ant(x1,y1,d1)
-a2 = Ant(x2,y2, d2)
-
-while 1:
-    n = int(input())
-    if n == -1:
-        break
-    try:
-        n1 = int(n)
-    except:
-        continue
-
-
-    for turn in range(n):
-        a1.step(grid)
-        a2.step(grid)
+while True:
+    moves = int(input("\nInput the amount of moves you want to pass. "))
+    if moves == -1:
+        exit()
+    for _ in range(moves):
+        ant1.move(int(ant1.x), int(ant1.y), str(ant1.direction))
+        ant2.move(int(ant2.x), int(ant2.y), str(ant2.direction))
+    print("")
+    for i in range(11):
+      print(" ".join(grid[i]))
+    print(ant1.x == 99 and "Removed" or " ".join([str(ant1.x), str(ant1.y), ant1.direction]))
+    print(ant2.x == 99 and "Removed" or " ".join([str(ant2.x), str(ant2.y), ant2.direction]))
 
     print_grid(grid)
     print(a1)
