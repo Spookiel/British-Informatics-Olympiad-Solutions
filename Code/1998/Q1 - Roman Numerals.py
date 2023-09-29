@@ -1,36 +1,26 @@
-#Solution made by @Catatria
-sep = []
-ans = []
-num = str(input("Input a number. "))
+#Solution made by @Pararcana
+roman = []
+num = 5000
+total = 0
+numerals = {1: "I",
+            5: "V",
+            10: "X",
+            50: "L",
+            100: "C",
+            500: "D",
+            1000: "M"
+}
+denary = int(input("Please input a number: "))
 
-if 1 > num >= 4000:
-  print("Error: Invalid number, above 4000 or below 1.")
-  exit()
+for i in range(1, 8):
+  num = num / (i % 2 == 0 and 2 or 5)
+  for _ in range(3):
+    if num + total <= denary:
+      roman.append(numerals[int(num)])
+      total += num
+    elif (i%2==0 and num*4/5 or num*9/10) + total <= denary:
+      roman.append(numerals[int(i%2==0 and num/(i%2!=0 and 2 or 5) or num/10)])
+      roman.append(numerals[int(num)])
+      total += i%2==0 and num*4/5 or num*9/10
 
-for i in range(4-len(num)):
-  sep.append(0)
-for i in range(len(num)):
-  sep.append(int(num[i]))
-
-romanNumerals = [["C", "D", "M"], ["X", "L", "C"], ["I", "V", "X"]]
-
-for i in range(sep[0]):
-  ans.append("M")
-
-for i in range(3):
-  if 3 >= sep[i+1] >= 1:
-    for j in range(sep[i+1]):
-      ans.append(romanNumerals[i][0])
-  elif sep[i+1] == 4:
-    ans.append(romanNumerals[i][0]+romanNumerals[i][1])
-  elif sep[i+1] == 5:
-    ans.append(romanNumerals[i][1])
-  elif 8 >= sep[i+1] >= 6:
-    ans.append(romanNumerals[i][1])
-    for j in range(sep[i+1]-5):
-      ans.append(romanNumerals[i][0])
-  elif sep[i+1] == 9:
-    ans.append(romanNumerals[i][0]+romanNumerals[i][2])
-    
-ans = "".join(ans)
-print("\n"+ans)
+print("".join(roman))
