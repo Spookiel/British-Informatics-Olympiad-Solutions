@@ -35,6 +35,7 @@ rScore, gScore = 0,0
 tileSetCopy = set(tileSet)
 
 for col in ["red", "green"]:
+    t = 0
     while tileSet:
         nn = tileSet.pop()
         #print(nn, board[nn[1]][nn[0]])
@@ -49,8 +50,8 @@ for col in ["red", "green"]:
                     if canConnect(tiles[board[ny][nx]], tiles[board[nnn[0]][nnn[1]]], col) == k:
                         queue.append(nnn)
                         seen.add(nnn)
-                    print("TRYING TO CONNECT", nx, ny, nnn, board[nnn[0]][nnn[1]])
+                    #print("TRYING TO CONNECT", nx, ny, nnn, board[nnn[0]][nnn[1]])
                 except Exception as e:
                     pass
                     #print(e, ny, nx, nnn, "HERE")
-        print(seen, nn)
+        print(seen, nn, col)

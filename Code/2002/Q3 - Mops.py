@@ -27,6 +27,7 @@ Let f(i) = min( f(Xj)+f(i/X) for X | i,
                 
 Or more simply
 
+
 For each mop, you can either +1 to the minimum way to get N-1, or find the sum of the ways to get to two factors of N
 
 eg. Given 12

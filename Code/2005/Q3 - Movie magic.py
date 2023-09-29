@@ -1,6 +1,6 @@
 
 
-from functool import lru_cache
+from functools import lru_cache
 
 
 @lru_cache(maxsize=None)
