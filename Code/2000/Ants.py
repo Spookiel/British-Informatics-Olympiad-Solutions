@@ -1,3 +1,4 @@
+#Solution by @Pararcana
 print("""Co-ordinates are from 1 - 11")
 Directions are T  = Top, B = Bottom, L = Left, R = Right
 Please use the format 'x y d' e.g. '1 1 T'\n""") 
