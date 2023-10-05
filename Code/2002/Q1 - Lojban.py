@@ -15,6 +15,8 @@ for i in range(0, len(lojban), 2):
 
 print("".join(denary))
 
+#Rest by Spookiel
+
 #1b)
 #print(convertTo(convertFrom("sovo")+convertFrom("rexa")))
 # = pareno
