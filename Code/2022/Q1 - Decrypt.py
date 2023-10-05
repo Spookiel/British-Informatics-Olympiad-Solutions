@@ -27,6 +27,7 @@ else:
 
 print("".join(decrypt(s)))
 
+#Rest by Spookiel
 def b():
     for word in product(alpha, repeat=5):
         sword = list(word)
