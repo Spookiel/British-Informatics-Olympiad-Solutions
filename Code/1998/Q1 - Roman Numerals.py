@@ -12,4 +12,4 @@ for i, n in enumerate(num):
     for j in range(len(cast[int(n)])):
         ans.append(roman[i][cast[int(n)][j]])
     
-return "".join(ans)
+print("".join(ans))
