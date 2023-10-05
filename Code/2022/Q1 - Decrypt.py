@@ -63,5 +63,5 @@ def d():
     print(t)
   
 #b() # z z z z a
-c() # 103
-d()
+#c() # 103
+#d()
