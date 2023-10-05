@@ -1,26 +1,16 @@
 #Solution made by @Pararcana
-roman = []
-num = 5000
-total = 0
-numerals = {1: "I",
-            5: "V",
-            10: "X",
-            50: "L",
-            100: "C",
-            500: "D",
-            1000: "M"
-}
-denary = int(input("Please input a number: "))
+num = "{:04d}".format(int(input("Please input a number: ")))
+ans = []
+roman = [
+["M"],
+["C", "D", "M"],
+["X", "L", "C"],
+["I", "V", "X"]
+]
+format = [[0], [0,0], [0,0,0], [0,1], [1], [1,0], [1,0,0], [1,0,0,0], [0,2]]
+for i, n in enumerate(num):
+  if n != "0":
+    for j in range(len(format[int(n)-1])):
+       ans.append(roman[i][format[int(n)-1][j]])
 
-for i in range(1, 8):
-  num = num / (i % 2 == 0 and 2 or 5)
-  for _ in range(3):
-    if num + total <= denary:
-      roman.append(numerals[int(num)])
-      total += num
-    elif (i%2==0 and num*4/5 or num*9/10) + total <= denary:
-      roman.append(numerals[int(i%2==0 and num/(i%2!=0 and 2 or 5) or num/10)])
-      roman.append(numerals[int(num)])
-      total += i%2==0 and num*4/5 or num*9/10
-
-print("".join(roman))
+print("".join(ans))
