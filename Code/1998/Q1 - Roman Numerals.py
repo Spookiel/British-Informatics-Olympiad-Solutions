@@ -7,9 +7,9 @@ roman = [
 ["X", "L", "C", ""],
 ["I", "V", "X", ""]
 ]
-format = [[-1], [0], [0,0], [0,0,0], [0,1], [1], [1,0], [1,0,0], [1,0,0,0], [0,2]]
+cast = [[-1], [0], [0,0], [0,0,0], [0,1], [1], [1,0], [1,0,0], [1,0,0,0], [0,2]]
 for i, n in enumerate(num):
-    for j in range(len(format[int(n)])):
-        ans.append(roman[i][format[int(n)][j]])
+    for j in range(len(cast[int(n)])):
+        ans.append(roman[i][cast[int(n)][j]])
     
 return "".join(ans)
