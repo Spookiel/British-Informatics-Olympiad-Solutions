@@ -1,3 +1,4 @@
+#Solution by @Pararcana
 roman, repeat = input("Input Roman Numerals and a number: ").split()
 roman, repeat = list(roman.upper()), int(repeat)
 numerals = [
