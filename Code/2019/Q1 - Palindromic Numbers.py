@@ -1,85 +1,19 @@
+#Solution by @Pararcana
+def makePalindrome(n):
+  mid = len(n) % 2 != 0 and n[(len(n) - 1)//2] or ""
+  palindrome = n[0:len(n)//2] + mid + n[(len(n)//2)-1::-1]
+  return int(palindrome)
 
+target = str(int(input("Enter a number: ")) + 1)
+num = makePalindrome(target)
 
-
-n = int(input())
-
-
-#12345
-#12421
-
-
-
-#9634127
-#9634369
-
-
-#12945
-#13031
-
-#123456
-#124421
-
-
-#456123
-#456654
-
-
-def brute(n):
-    while True:
-        n += 1
-        if str(n)==str(n)[::-1]:
-            return n
-
-
-def solve(n):
-    if n==9:
-        return 11
-    if n < 10:
-        return n+1
-    sn = str(n)
-    if len(sn)%2==0:
-        fhalf = int("".join(sn[:len(sn)//2]))
-        shalf = int("".join(sn[len(sn)//2:]))
-        flag = False
-        if sn==sn[::-1]:
-            fhalf += 1
-            flag = True
-        if len(set(sn)) == 1 and sn[0] == "9":
-            return "1" + ("0" * (len(sn) - 1)) + "1"
-        if str(fhalf)[::-1] > str(shalf):
-
-            return str(fhalf)+str(fhalf)[::-1]
-        fhalf += 1 if not flag else 0
-        return str(fhalf)+str(fhalf)[::-1]
-    else:
-        #991
-        #1001
-
-        #891
-        #909
-        #123
-        fhalf = int("".join(sn[:len(sn)//2]))
-        shalf = int("".join(sn[(len(sn)+1)//2:]))
-        mid = int(sn[len(sn)//2])
-        #print(fhalf, shalf, mid)
-        if mid < 9:
-            #print("HERE")
-            mid += 1 if str(fhalf)[::-1] <= str(shalf) else 0
-            return str(fhalf)+str(mid)+str(fhalf)[::-1]
-        else:
-            if len(set(sn))==1 and sn[0]=="9":
-                return "1" + ("0" * (len(sn) - 1)) + "1"
-            fhalf += 1
-            mid = "0"
-
-            return str(fhalf)+mid+str(fhalf)[::-1]
-
-
-
-
-
-ans = solve(n)
-print(ans)
+if len(target) == 1:
+  print(target)
+else:
+  while num < int(target):
+    sNum = str(num)
+    num = makePalindrome(str(int(sNum[0:(len(sNum)+1)//2])+1) + sNum[(len(sNum)+1)//2:])
+  print(num)
 
 def b():
     ma = 0
