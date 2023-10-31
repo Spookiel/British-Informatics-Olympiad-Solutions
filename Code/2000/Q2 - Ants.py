@@ -35,7 +35,7 @@ ant2 = Ant(position2[0], position2[1], position2[2])
 
 grid = []
 for _ in range(11):
-  grid.append([".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "."])
+  grid.append(["."]*11)
 
 while True:
     moves = int(input("\nInput the amount of moves you want to pass. "))
