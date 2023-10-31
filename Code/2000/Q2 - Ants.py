@@ -49,7 +49,3 @@ while True:
       print(" ".join(v))
     print(ant1.x == 99 and "Removed" or " ".join([str(ant1.x), str(ant1.y), ant1.direction]))
     print(ant2.x == 99 and "Removed" or " ".join([str(ant2.x), str(ant2.y), ant2.direction]))
-
-    print_grid(grid)
-    print(a1)
-    print(a2)
