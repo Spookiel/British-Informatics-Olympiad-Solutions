@@ -45,8 +45,8 @@ while True:
         ant1.move(int(ant1.x), int(ant1.y), str(ant1.direction))
         ant2.move(int(ant2.x), int(ant2.y), str(ant2.direction))
     print("")
-    for i in range(11):
-      print(" ".join(grid[i]))
+    for v in grid:
+      print(" ".join(v))
     print(ant1.x == 99 and "Removed" or " ".join([str(ant1.x), str(ant1.y), ant1.direction]))
     print(ant2.x == 99 and "Removed" or " ".join([str(ant2.x), str(ant2.y), ant2.direction]))
 
