@@ -1,35 +1,24 @@
+digitWords = ["ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN"]
+word = input("Enter a word: ").upper()
 
-
-s = list(input())
-
-
-words = ["ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE"]
-
-wdic = {i:words[i-1] for i in range(1,10)}
-flag = False
-for i in wdic:
-
-    found = [False]*len(wdic[i])
-    pos = 0
-    for let in range(len(s)):
-        if s[let]==wdic[i][pos]:
-            if pos==0:
-                found[pos] = True
-                pos += 1
-            else:
-                if found[pos-1]:
-                    found[pos] = True
-                    pos += 1
-        if all(found):
-            print(i)
-            flag = True
-            break
-    if flag:
-        break
-
-if not flag:
-    print("NO")
-
+for digit in digitWords:
+  wordFilter = [v for v in word if v in digit]
+  order = []
+  counter = 0
+  
+  for v in digit:
+    try:
+      first = wordFilter.index(v)
+      order.append(first + counter)
+      wordFilter = [v for i, v in enumerate(wordFilter) if i > first]
+      counter += first + 1
+    except ValueError:
+      break  
+      
+  if sorted(order) == order and len(order) == len(digit):
+    print(digitWords.index(digit) + 1)
+    exit()
+print("NO")
 
 
 def b():
