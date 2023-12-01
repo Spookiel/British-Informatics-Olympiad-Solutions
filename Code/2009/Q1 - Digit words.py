@@ -1,3 +1,4 @@
+# Code by @Pararcana
 digitWords = ["ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN"]
 word = input("Enter a word: ").upper()
 
