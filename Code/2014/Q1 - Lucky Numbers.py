@@ -1,46 +1,23 @@
+#Solution by @Pararcana
+lucky = [i for i in range(1, 10005, 2)]
+n = 3
 
+for _ in range(168):
+  luckyNew = []
+  for i, v in enumerate(lucky):
+    if (i+1) % n != 0:
+      luckyNew.append(v)
+  lucky = luckyNew.copy()
+  n = lucky[lucky.index(n) + 1]
 
+num = int(input("Enter a number: "))
 
+highest = max([v for v in lucky if v < num])
+lowest = min([v for v in lucky if v > num])
 
-n = int(input())
+print(highest, lowest)
 
-def gen(n):
-    odds = [i for i in range(1,n+50, 2)]
-
-
-    for i in range(1,len(odds)):
-        try:
-            if odds[i]!=0:
-                #print(odds[i], "FOUND")
-                for j in range(odds[i]-1,len(odds), odds[i]):
-                    #print("REMOVING", odds[j])
-                    odds[j] = 0
-
-                for i in range(len(odds)-1,-1,-1):
-                    if odds[i]==0:
-                        odds.pop(i)
-        except:
-            break
-    return odds
-
-odds = gen(n)
-def solve(odds, n):
-    ans = []
-    odds = gen(n)
-    c = 0
-    while odds[c] < n:
-        c += 1
-    ans.append(odds[c-1])
-    while odds[c]==n:
-        c += 1
-    ans.append(odds[c])
-    return tuple(ans)
-
-got = solve(odds, n)
-print(" ".join(list(map(str, got))))
-#print(odds)
-
-
+#Rest by Spookiel
 def b():
     odds = gen(100)
     ans = 0

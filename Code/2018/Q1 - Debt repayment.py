@@ -1,24 +1,15 @@
+#Solution by @Pararcana
+def ceil(num):
+  return num.is_integer() and num or int(num) + 1
+  
+debt, total = 10000, 0
 
-from math import ceil,floor
-r,p = list(map(int, input().split()))
-r *= 0.01
-p *= 0.01
+interest, repayment = input("Please input interest and repayment percentages: ").split()
+interest, repayment = float(interest)/100, float(repayment)/100
 
-done = 0
-amount = 10000
-while amount > 0:
-    debt = ceil(round(amount*r, 6))
-    #print(amount*r,debt, "HERE")
-    amount += debt
-    toPay = ceil(round(amount*p, 6))
-    if toPay < 5000:
-        toPay = 5000
-    if amount < toPay:
-        toPay = amount
-    done += toPay
-    amount -= toPay
-    #print(done, amount, toPay)
-#print(amount, toPay/100)
-print(done/100)
+while debt != 0:
+  debt = ceil((debt * interest) + debt)
+  total += debt <= 5000 and debt or max(ceil(debt * repayment), 5000)
+  debt -= debt <= 5000 and debt or max(ceil(debt * repayment), 5000)
 
-
+print(total/100)
